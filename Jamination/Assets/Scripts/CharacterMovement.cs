@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class CharacterMovement : MonoBehaviour
     float verticalMove;
     bool isGrounded = true;
     Rigidbody2D rb;
+    public Directions directions;
+    private int directionCount = 0;
+    [SerializeField]private float lerpSpeed = 0.01f;
+    Vector3 targetPosition;
+    private bool isMoved = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +30,14 @@ public class CharacterMovement : MonoBehaviour
         verticalMove = Input.GetAxisRaw("Vertical");
         if(Input.GetButtonDown("Horizontal") && isGrounded)
         {
-            playerTransform.position += new Vector3(horizontalMove,0f,0f);
+            StartCoroutine(Move());
         }
         else if(Input.GetButtonDown("Vertical") && isGrounded)
         {
-            playerTransform.position += new Vector3(0f,verticalMove,0f);
+            StartCoroutine(Move());
         }
+        
+        Debug.Log(isMoved);
         
         // if(!isGrounded && playerTransform.localScale.x > 0f && playerTransform.localScale.y > 0)
         // {
@@ -52,4 +60,36 @@ public class CharacterMovement : MonoBehaviour
             Debug.Log("Enter");
         }
     }
+    IEnumerator Move()
+    {
+        if(Input.GetButtonDown("Horizontal") && isGrounded)
+        {
+            targetPosition = playerTransform.position + new Vector3(horizontalMove,0f,0f);
+            Debug.Log(targetPosition);
+            playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+            isMoved = true;
+        }
+        else if(Input.GetButtonDown("Vertical") && isGrounded)
+        {
+            targetPosition = playerTransform.position + new Vector3(0f,verticalMove,0f);
+            Debug.Log(targetPosition);
+            playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+            isMoved = true;
+        }
+        yield return new WaitForSeconds(1);
+        if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1].Length > directionCount && isMoved )
+        {
+            targetPosition = playerTransform.position + new Vector3(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],0f);
+            Debug.Log("Done");
+            playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+            directionCount++;
+            isMoved = false;
+        }
+        else
+        {
+            directionCount = 0;
+            isMoved = false;
+        }
+    }
+    
 }
