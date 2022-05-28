@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 1255058884}
   m_Layer: 0
   m_Name: Void
-  m_TagString: Untagged
+  m_TagString: Void
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,9 +410,9 @@ GameObject:
   - component: {fileID: 1366316636}
   - component: {fileID: 1366316635}
   - component: {fileID: 1366316634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -639,23 +639,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1620034431 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6741624845846427697, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
-  m_PrefabInstance: {fileID: 6741624845676776598}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1620034437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620034431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69fd2dbd5cc3e8a41b273fb46dbd72b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1982453511
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +653,7 @@ GameObject:
   - component: {fileID: 2124886131}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1369,29 +1352,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 987759834, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427697, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427708, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
-      propertyPath: lerpSpeed
-      value: 1
+      propertyPath: RaycastRange
+      value: 0.6
       objectReference: {fileID: 0}
-    - target: {fileID: 6741624845846427708, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
-      propertyPath: directions
-      value: 
-      objectReference: {fileID: 1620034437}
     - target: {fileID: 6741624845846427711, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427711, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.48
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427711, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.02
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427711, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: m_LocalPosition.z

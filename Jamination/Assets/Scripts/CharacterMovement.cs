@@ -173,7 +173,7 @@ public class CharacterMovement : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 playerTransform.position -= new Vector3(0f,-0.3f,0f);
             }
-            else 
+            else if(isGrounded)
             {
                 targetPosition = playerTransform.position + new Vector3(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);

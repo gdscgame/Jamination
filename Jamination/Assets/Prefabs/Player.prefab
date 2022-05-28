@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directions: {fileID: 1620034437}
+  RaycastRange: 0.6
   lerpSpeed: 1
 --- !u!50 &987759834
 Rigidbody2D:
@@ -122,7 +123,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &987759835
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
