@@ -112,7 +112,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 isWaiting = true;
                 playerTransform.position += new Vector3(knockBack,0f,0f);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.3f);
                 playerTransform.position -= new Vector3(knockBack,0f,0f);
                 isWaiting = false;
                 isCrash = true;
@@ -121,7 +121,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 isWaiting = true;
                 playerTransform.position += new Vector3(-knockBack,0f,0f);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.3f);
                 playerTransform.position -= new Vector3(-knockBack,0f,0f);
                 isWaiting = false;
                 isCrash = true;
@@ -140,8 +140,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 isWaiting = true;
                 playerTransform.position += new Vector3(0f,knockBack,0f);
-                yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0f,knockBack - 0.2f,0f);
+                yield return new WaitForSeconds(0.3f);
+                playerTransform.position -= new Vector3(0f,knockBack,0f);
                 isWaiting = false;
                 isCrash = true;
             }
@@ -149,8 +149,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 isWaiting = true;
                 playerTransform.position += new Vector3(0f,-knockBack,0f);
-                yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0f,-knockBack + 0.2f,0f);
+                yield return new WaitForSeconds(0.3f);
+                playerTransform.position -= new Vector3(0f,-knockBack,0f);
                 isWaiting = false;
                 isCrash = true;
             }
@@ -163,7 +163,7 @@ public class CharacterMovement : MonoBehaviour
             }
         }
         isWaiting = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.6f);
         isWaiting = false;
         if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1].Length > directionCount && isMoved && isGrounded || isCrash )
         {
@@ -172,7 +172,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 isWaiting = true;
                 playerTransform.position += new Vector3(knockBack,0f,0f);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.3f);
                 playerTransform.position -= new Vector3(knockBack,0f,0f);
                 isWaiting = false;
                 isCrash = false;
@@ -182,7 +182,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 isWaiting = true;
                 playerTransform.position += new Vector3(-knockBack,0f,0f);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.3f);
                 playerTransform.position -= new Vector3(-knockBack,0f,0f);
                 isWaiting = false;
                 isCrash = false;
@@ -192,8 +192,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 isWaiting = true;
                 playerTransform.position += new Vector3(0f,knockBack,0f);
-                yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0f,knockBack - 0.2f,0f);
+                yield return new WaitForSeconds(0.3f);
+                playerTransform.position -= new Vector3(0f,knockBack,0f);
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
@@ -202,8 +202,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 isWaiting = true;
                 playerTransform.position += new Vector3(0f,-knockBack,0f);
-                yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0f,-knockBack + 0.2f,0f);
+                yield return new WaitForSeconds(0.3f);
+                playerTransform.position -= new Vector3(0f,-knockBack,0f);
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
@@ -224,14 +224,14 @@ public class CharacterMovement : MonoBehaviour
         }
     }
     IEnumerator DoubleActions(){
-        if(Input.GetKeyDown(KeyCode.Space) && !isWaiting && isGrounded)
+        if(Input.GetKeyDown(KeyCode.Space) && !isWaiting && isGrounded && doubleAction.bufAmount > 0)
         {
             if(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][2] == 0f)
             {
                 isWaiting = true;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.3f);
                 actionCount += 1;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
@@ -244,15 +244,21 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = true;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.3f);
                 actionCount += 1;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.3f);
                 actionCount += 1;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 actionCount = 0;
+                yield return new WaitForSeconds(0.3F);
+                targetPosition = playerTransform.position + new Vector3(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],0f);
+                playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                directionCount++;
+                isMoved = false;
+                isCrash = false;
                 isWaiting = false;
                 doubleAction.bufAmount = 0;
             }
