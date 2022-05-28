@@ -9,13 +9,25 @@ public class Directions : MonoBehaviour
         new float[] {1f,0f,1f},
         new float[] {0f,1f,0f,0f},
         new float[] {-1f,0f,0f,1f},
-        new float[] {0f,0f,1f,0f,-1f}
+        new float[] {0f,0f,1f,0f,-1f},
+        new float[] {-1f,-1f,0f,1f,0f},
+        new float[] {1f,1f,0f,0f,-1f},
+        new float[] {1f,0f,-1f,-1f},
+        new float[] {1f,0f,0f,-1f},
+        new float[] {0f,0f,1f,0f},
+        new float[] {-1f,0f,0f,-1f,0f,1f}
     };
     public static float[][] verticalDirections = new float[][]{
         new float[] {0f,-1f,0f},
         new float[] {1f,0f,1f,-1f},
         new float[] {0f,-1f,-1f,0f},
-        new float[] {-1f,-1f,0f,1f,0f}
+        new float[] {-1f,-1f,0f,1f,0f},
+        new float[] {0f,0f,-1f,0f,1f},
+        new float[] {0f,0f,-1f,1f,0f},
+        new float[] {0f,1f,0f,0f},
+        new float[] {0f,-1f,1f,0f},
+        new float[] {1f,-1f,0f,-1f},
+        new float[] {0f,-1f,-1f,0f,1f,0f}
     };
     // Start is called before the first frame update
     void Start()
