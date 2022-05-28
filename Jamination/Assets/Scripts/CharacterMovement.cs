@@ -24,6 +24,7 @@ public class CharacterMovement : MonoBehaviour
     private bool wallBack = false;
     private bool isCrash = false;
     [SerializeField]private float knockBack = 0.3f;
+    private int actionCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,10 @@ public class CharacterMovement : MonoBehaviour
         RaycastHit2D hitBack = Physics2D.Raycast(playerTransform.position , -playerTransform.up , RaycastRange, layerMask);
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
+        if(Input.GetKeyDown(KeyCode.Space) && !isWaiting && isGrounded)
+        {
+            StartCoroutine(DoubleActions());
+        }
         if((Input.GetButtonDown("Horizontal") && isGrounded && !isWaiting) || isCrash)
         {
             StartCoroutine(Move());
@@ -215,6 +220,40 @@ public class CharacterMovement : MonoBehaviour
         {
             directionCount = 0;
             isMoved = false;
+        }
+    }
+    IEnumerator DoubleActions(){
+        if(Input.GetKeyDown(KeyCode.Space) && !isWaiting && isGrounded)
+        {
+            if(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][2] == 0f)
+            {
+                isWaiting = true;
+                targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
+                playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                yield return new WaitForSeconds(0.5f);
+                actionCount += 1;
+                targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
+                playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                isWaiting = false;
+                actionCount = 0;
+            }
+            if(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][2] != 0f)
+            {
+                isWaiting = true;
+                targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
+                playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                yield return new WaitForSeconds(0.5f);
+                actionCount += 1;
+                targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
+                playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                yield return new WaitForSeconds(0.5f);
+                actionCount += 1;
+                targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
+                playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                actionCount = 0;
+                isWaiting = false;
+            }
+
         }
     }
     
