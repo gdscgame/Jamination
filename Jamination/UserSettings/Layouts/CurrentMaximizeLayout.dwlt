@@ -86,7 +86,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 34225
+  controlID: 35427
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,9 +224,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 1ab00000
-      m_LastClickedID: 45082
-      m_ExpandedIDs: d8b8feff08befeff5cbefeffa4bffeffccc0feffacc9feffded4fefff2dcfeff82e5feffceebfeff28ecfeff82ecfeff08f4feff08f7feff0001ffff7203ffff5a07ffffd808fffffe0bffffea0effff5811ffff1412ffff9412ffff8e13ffff0019ffffde1cffff401effff741fffffb82affff7439ffffe239ffff703fffffb647ffff1a48ffff8448ffffe848ffff9249ffff564affffe64bffffc44cffff2a4dffff9c55ffff7456ffff0857ffffd257ffffc47bffff9699ffff5cbaffffcabdffff8ebefffffabfffff06ceffff78ceffff14d0ffff0ed2ffffb4d8fffffaddffff68deffffdadeffffd2dfffffc2e0ffffaee1ffff2ce3ffff5ee7ffffd0e8ffff36eaffff6eedffffc2eeffffa6f0ffffc4f0ffff2ef2fffff0f6ffffcc5f0000c86000002e610000ae610000d4610000cc7800001e7a0000747a00009e7a0000ce7a000008800000d8810000348200009a8200000a8300000c8a0000368f000080950000b09500004a990000829e00000e9f00008c9f000036a00000e8a000004ca10000b0a10000eca1000060a20000f0a2000024a40000b4a4000058a5000090a6000054aa00005cab000062ac000062ad0000
+      m_SelectedIDs: 1aa50000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 58a2feff0ea6feff9ca6feff1ea7feff98a7feff0aa8feff80a8feff32acfeffd8b8feff08befeff5cbefeffa4bffeffccc0feffacc9feffded4fefff2dcfeff82e5feffceebfeff28ecfeff82ecfeff08f4feff08f7feff0001ffff7203ffff5a07ffffd808fffffe0bffffea0effff5811ffff1412ffff9412ffff8e13ffff0019ffffde1cffff401effff741fffffb82affff7439ffffe239ffff703fffffb647ffff1a48ffff8448ffffe848ffff9249ffff564affffe64bffffc44cffff2a4dffff9c55ffff7456ffff0857ffffd257ffffc47bffff9699ffff5cbaffffcabdffff8ebefffffabfffff06ceffff78ceffff14d0ffff0ed2ffffb4d8fffffaddffff68deffffdadeffffd2dfffffc2e0ffffaee1ffff2ce3ffff5ee7ffffd0e8ffff36eaffff6eedffffc2eeffffa6f0ffffc4f0ffff2ef2fffff0f6ffffcc5f0000c86000002e610000ae610000d4610000cc7800001e7a0000747a00009e7a0000ce7a000008800000d8810000348200009a8200000a8300000c8a0000368f000080950000b09500004a990000829e00000e9f00008c9f000036a00000e8a000004ca10000b0a10000eca1000060a20000f0a2000024a40000b4a4000058a5000090a6000054aa00005cab000062ac000062ad0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -269,8 +269,8 @@ MonoBehaviour:
     y: 0
     width: 811
     height: 396
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 8}
   m_Panes:
   - {fileID: 8}
@@ -409,7 +409,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 1
+      displayed: 0
       snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -525,9 +525,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -5.3909407, y: 1.889859, z: -0.008145291}
+    m_Target: {x: -6.865866, y: 1.7044538, z: -0.024357151}
     speed: 2
-    m_Value: {x: -5.3909407, y: 1.889859, z: -0.008145291}
+    m_Value: {x: -6.865866, y: 1.7044538, z: -0.024357151}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -578,9 +578,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1.3735452
+    m_Target: 2.9947379
     speed: 2
-    m_Value: 1.3735452
+    m_Value: 2.9947379
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -771,21 +771,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprites
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Sprites
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ASUS\Desktop\Unity_Projeler\Jamination\Jamination
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: a85e0000
-    m_LastClickedID: 24232
+    m_SelectedIDs: a45e0000
+    m_LastClickedID: 24228
     m_ExpandedIDs: 00000000a05e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -839,8 +839,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 1ab00000
-    m_LastClickedInstanceID: 45082
+    m_SelectedInstanceIDs: 1aa50000
+    m_LastClickedInstanceID: 42266
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300006ca9ffffc2ac0000
     m_RenameOverlay:
@@ -866,7 +866,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 240}
+    m_ScrollPosition: {x: 0, y: 89}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 171
@@ -982,8 +982,8 @@ MonoBehaviour:
     y: 0
     width: 294
     height: 675
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
