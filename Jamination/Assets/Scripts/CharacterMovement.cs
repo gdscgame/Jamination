@@ -26,12 +26,17 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField]private float knockBack = 0.3f;
     private int actionCount;
     public DoubleAction doubleAction;
+    int animIndex;
+    AnimManager animManager;
+    bool isWin;
     // Start is called before the first frame update
     void Start()
     {
         playerTransform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0F;
+        animManager = GameObject.Find("AnimManager").GetComponent<AnimManager>();
+        animManager.SetAnim(animIndex);
     }
 
     // Update is called once per frame
@@ -44,6 +49,11 @@ public class CharacterMovement : MonoBehaviour
         RaycastHit2D hitBack = Physics2D.Raycast(playerTransform.position , -playerTransform.up , RaycastRange, layerMask);
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
+        if(Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical") || Input.GetKeyDown(KeyCode.Space))
+        {
+            animIndex++;
+            animManager.SetAnim(animIndex);
+        }
         if(Input.GetKeyDown(KeyCode.Space) && !isWaiting && isGrounded)
         {
             StartCoroutine(DoubleActions());
@@ -90,11 +100,33 @@ public class CharacterMovement : MonoBehaviour
         }
   
     }
+    void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.tag == "Award"){
+            animManager.ChangeLevel();
+            StartCoroutine(WaitNextStage());
+            isWin = true;
+        }
+    }
+    IEnumerator WaitNextStage()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+
+
+    }
     void OnTriggerExit2D(Collider2D other)
     {
         if(other.gameObject.tag == "Ground")
         {
             isGrounded = false;
+            if(!isWin){
+                Restart();
+            }
         }
     }
     void OnTriggerStay2D(Collider2D other)
@@ -106,6 +138,7 @@ public class CharacterMovement : MonoBehaviour
     }
     IEnumerator Move()
     {
+
         if(Input.GetButtonDown("Horizontal") && isGrounded && !isWaiting)
         {
             if(horizontalMove == 1 && wallRight && isGrounded)
@@ -163,7 +196,9 @@ public class CharacterMovement : MonoBehaviour
             }
         }
         isWaiting = true;
+
         yield return new WaitForSeconds(0.6f);
+
         isWaiting = false;
         if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1].Length > directionCount && isMoved && isGrounded || isCrash )
         {
@@ -235,8 +270,14 @@ public class CharacterMovement : MonoBehaviour
                 actionCount += 1;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
-                isWaiting = false;
                 actionCount = 0;
+                yield return new WaitForSeconds(0.3F);
+                targetPosition = playerTransform.position + new Vector3(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],0f);
+                playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                directionCount++;
+                isMoved = false;
+                isCrash = false;
+                isWaiting = false;
                 doubleAction.bufAmount = 0;
             }
             if(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][2] != 0f)
