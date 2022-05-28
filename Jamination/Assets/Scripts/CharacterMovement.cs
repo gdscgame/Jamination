@@ -22,6 +22,8 @@ public class CharacterMovement : MonoBehaviour
     private bool wallLeft = false;
     private bool wallForward = false;
     private bool wallBack = false;
+    private bool isCrash = false;
+    [SerializeField]private float knockBack = 0.3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,17 +35,17 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hitRight = Physics2D.Raycast(playerTransform.position , playerTransform.right , RaycastRange, layerMask);
-        RaycastHit2D hitLeft = Physics2D.Raycast(playerTransform.position , -playerTransform.right , RaycastRange, layerMask);
-        RaycastHit2D hitForward = Physics2D.Raycast(playerTransform.position , playerTransform.forward , RaycastRange, layerMask);
-        RaycastHit2D hitBack = Physics2D.Raycast(playerTransform.position , -playerTransform.forward , RaycastRange, layerMask);
+        RaycastHit2D hitRight = Physics2D.Raycast(new Vector3(playerTransform.position.x,playerTransform.position.y-0.01f,0f), playerTransform.right , RaycastRange, layerMask);
+        RaycastHit2D hitLeft = Physics2D.Raycast(new Vector3(playerTransform.position.x,playerTransform.position.y-0.01f,0f) , -playerTransform.right , RaycastRange, layerMask);
+        RaycastHit2D hitForward = Physics2D.Raycast(playerTransform.position , playerTransform.up , RaycastRange, layerMask);
+        RaycastHit2D hitBack = Physics2D.Raycast(playerTransform.position , -playerTransform.up , RaycastRange, layerMask);
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
-        if(Input.GetButtonDown("Horizontal") && isGrounded)
+        if((Input.GetButtonDown("Horizontal") && isGrounded) || isCrash)
         {
             StartCoroutine(Move());
         }
-        else if(Input.GetButtonDown("Vertical") && isGrounded)
+        else if((Input.GetButtonDown("Vertical") && isGrounded) || isCrash)
         {
             StartCoroutine(Move());
         }
@@ -106,72 +108,91 @@ public class CharacterMovement : MonoBehaviour
         {
             if(horizontalMove == 1 && wallRight)
             {
-                playerTransform.position += new Vector3(0.3f,0f,0f);
+                playerTransform.position += new Vector3(knockBack,0f,0f);
                 yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0.3f,0f,0f);
+                playerTransform.position -= new Vector3(knockBack,0f,0f);
+                Debug.Log("1");
+                isCrash = true;
             }
             else if(horizontalMove == -1 && wallLeft)
             {
-                playerTransform.position += new Vector3(-0.3f,0f,0f);
+                playerTransform.position += new Vector3(-knockBack,0f,0f);
                 yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(-0.3f,0f,0f);
+                playerTransform.position -= new Vector3(-knockBack,0f,0f);
+                Debug.Log("2");
+                isCrash = true;
             }
             else
             {
                 targetPosition = playerTransform.position + new Vector3(horizontalMove,0f,0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 isMoved = true;
+                Debug.Log("3");
             }
         }
         else if(Input.GetButtonDown("Vertical") && isGrounded && !isWaiting)
         {
             if(verticalMove == 1 && wallForward)
             {
-                playerTransform.position += new Vector3(0f,0.3f,0f);
+                playerTransform.position += new Vector3(0f,knockBack,0f);
                 yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0f,0.3f,0f);
+                playerTransform.position -= new Vector3(0f,knockBack - 0.2f,0f);
+                Debug.Log("4");
+                isCrash = true;
             }
             else if(verticalMove == -1 && wallBack)
             {
-                playerTransform.position += new Vector3(0f,-0.3f,0f);
+                playerTransform.position += new Vector3(0f,-knockBack,0f);
                 yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0f,-0.3f,0f);
+                playerTransform.position -= new Vector3(0f,-knockBack + 0.2f,0f);
+                Debug.Log("5");
+                isCrash = true;
             }
             else
             {
                 targetPosition = playerTransform.position + new Vector3(0f,verticalMove,0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 isMoved = true;
+                Debug.Log("6");
             }
         }
         isWaiting = true;
+        Debug.Log("Done");
         yield return new WaitForSeconds(1);
         isWaiting = false;
-        if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1].Length > directionCount && isMoved )
+        if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1].Length > directionCount && isMoved || isCrash )
         {
             if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == 1 && wallRight)
             {
-                playerTransform.position += new Vector3(0.3f,0f,0f);
+                playerTransform.position += new Vector3(knockBack,0f,0f);
                 yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0.3f,0f,0f);
+                playerTransform.position -= new Vector3(knockBack,0f,0f);
+                isCrash = false;
+                Debug.Log("7");
             }
             else if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallLeft)
             {
-                playerTransform.position += new Vector3(-0.3f,0f,0f);
+                playerTransform.position += new Vector3(-knockBack,0f,0f);
                 yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(-0.3f,0f,0f);
+                playerTransform.position -= new Vector3(-knockBack,0f,0f);
+                isCrash = false;
+                Debug.Log("8");
             }
             else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == 1 && wallForward)
             {
-                playerTransform.position += new Vector3(0f,0.3f,0f);
+                playerTransform.position += new Vector3(0f,knockBack,0f);
                 yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0f,0.3f,0f);
+                playerTransform.position -= new Vector3(0f,knockBack - 0.2f,0f);
+                isCrash = false;
+                Debug.Log("9");
             }
             else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallBack)
             {
-                playerTransform.position += new Vector3(0f,-0.3f,0f);
+                playerTransform.position += new Vector3(0f,-knockBack,0f);
                 yield return new WaitForSeconds(0.5f);
-                playerTransform.position -= new Vector3(0f,-0.3f,0f);
+                playerTransform.position -= new Vector3(0f,-knockBack + 0.2f,0f);
+                isCrash = false;
+                Debug.Log("10");
             }
             else if(isGrounded)
             {
@@ -179,6 +200,8 @@ public class CharacterMovement : MonoBehaviour
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 directionCount++;
                 isMoved = false;
+                isCrash = false;
+                Debug.Log("11");
             }
         }
         if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1].Length <= directionCount)
