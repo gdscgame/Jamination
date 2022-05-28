@@ -35,8 +35,8 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hitRight = Physics2D.Raycast(new Vector3(playerTransform.position.x,playerTransform.position.y-0.01f,0f), playerTransform.right , RaycastRange, layerMask);
-        RaycastHit2D hitLeft = Physics2D.Raycast(new Vector3(playerTransform.position.x,playerTransform.position.y-0.01f,0f) , -playerTransform.right , RaycastRange, layerMask);
+        RaycastHit2D hitRight = Physics2D.Raycast(new Vector3(playerTransform.position.x,playerTransform.position.y-0.03f,0f), playerTransform.right , RaycastRange, layerMask);
+        RaycastHit2D hitLeft = Physics2D.Raycast(new Vector3(playerTransform.position.x,playerTransform.position.y-0.03f,0f) , -playerTransform.right , RaycastRange, layerMask);
         RaycastHit2D hitForward = Physics2D.Raycast(playerTransform.position , playerTransform.up , RaycastRange, layerMask);
         RaycastHit2D hitBack = Physics2D.Raycast(playerTransform.position , -playerTransform.up , RaycastRange, layerMask);
         horizontalMove = Input.GetAxisRaw("Horizontal");
@@ -104,9 +104,11 @@ public class CharacterMovement : MonoBehaviour
     }
     IEnumerator Move()
     {
+        Debug.Log("15");
         if(Input.GetButtonDown("Horizontal") && isGrounded && !isWaiting)
         {
-            if(horizontalMove == 1 && wallRight)
+            Debug.Log(14);
+            if(horizontalMove == 1 && wallRight && isGrounded)
             {
                 playerTransform.position += new Vector3(knockBack,0f,0f);
                 yield return new WaitForSeconds(0.5f);
@@ -114,7 +116,7 @@ public class CharacterMovement : MonoBehaviour
                 Debug.Log("1");
                 isCrash = true;
             }
-            else if(horizontalMove == -1 && wallLeft)
+            else if(horizontalMove == -1 && wallLeft && isGrounded)
             {
                 playerTransform.position += new Vector3(-knockBack,0f,0f);
                 yield return new WaitForSeconds(0.5f);
@@ -122,17 +124,18 @@ public class CharacterMovement : MonoBehaviour
                 Debug.Log("2");
                 isCrash = true;
             }
-            else
+            else if(isGrounded)
             {
                 targetPosition = playerTransform.position + new Vector3(horizontalMove,0f,0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 isMoved = true;
+                isCrash =false;
                 Debug.Log("3");
             }
         }
         else if(Input.GetButtonDown("Vertical") && isGrounded && !isWaiting)
         {
-            if(verticalMove == 1 && wallForward)
+            if(verticalMove == 1 && wallForward && isGrounded)
             {
                 playerTransform.position += new Vector3(0f,knockBack,0f);
                 yield return new WaitForSeconds(0.5f);
@@ -140,7 +143,7 @@ public class CharacterMovement : MonoBehaviour
                 Debug.Log("4");
                 isCrash = true;
             }
-            else if(verticalMove == -1 && wallBack)
+            else if(verticalMove == -1 && wallBack && isGrounded)
             {
                 playerTransform.position += new Vector3(0f,-knockBack,0f);
                 yield return new WaitForSeconds(0.5f);
@@ -148,50 +151,56 @@ public class CharacterMovement : MonoBehaviour
                 Debug.Log("5");
                 isCrash = true;
             }
-            else
+            else if (isGrounded)
             {
                 targetPosition = playerTransform.position + new Vector3(0f,verticalMove,0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 isMoved = true;
+                isCrash = false;
                 Debug.Log("6");
             }
         }
         isWaiting = true;
-        Debug.Log("Done");
+        Debug.Log("13");
         yield return new WaitForSeconds(1);
         isWaiting = false;
-        if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1].Length > directionCount && isMoved || isCrash )
+        if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1].Length > directionCount && isMoved && isGrounded || isCrash )
         {
-            if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == 1 && wallRight)
+            isCrash = false;
+            if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == 1 && wallRight && isGrounded)
             {
                 playerTransform.position += new Vector3(knockBack,0f,0f);
                 yield return new WaitForSeconds(0.5f);
                 playerTransform.position -= new Vector3(knockBack,0f,0f);
                 isCrash = false;
+                directionCount++;
                 Debug.Log("7");
             }
-            else if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallLeft)
+            else if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallLeft && isGrounded)
             {
                 playerTransform.position += new Vector3(-knockBack,0f,0f);
                 yield return new WaitForSeconds(0.5f);
                 playerTransform.position -= new Vector3(-knockBack,0f,0f);
                 isCrash = false;
+                directionCount++;
                 Debug.Log("8");
             }
-            else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == 1 && wallForward)
+            else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == 1 && wallForward && isGrounded)
             {
                 playerTransform.position += new Vector3(0f,knockBack,0f);
                 yield return new WaitForSeconds(0.5f);
                 playerTransform.position -= new Vector3(0f,knockBack - 0.2f,0f);
                 isCrash = false;
+                directionCount++;
                 Debug.Log("9");
             }
-            else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallBack)
+            else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallBack && isGrounded)
             {
                 playerTransform.position += new Vector3(0f,-knockBack,0f);
                 yield return new WaitForSeconds(0.5f);
                 playerTransform.position -= new Vector3(0f,-knockBack + 0.2f,0f);
                 isCrash = false;
+                directionCount++;
                 Debug.Log("10");
             }
             else if(isGrounded)
