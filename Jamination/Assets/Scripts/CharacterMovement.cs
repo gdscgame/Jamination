@@ -25,6 +25,7 @@ public class CharacterMovement : MonoBehaviour
     private bool isCrash = false;
     [SerializeField]private float knockBack = 0.3f;
     private int actionCount;
+    public DoubleAction doubleAction;
     // Start is called before the first frame update
     void Start()
     {
@@ -236,6 +237,7 @@ public class CharacterMovement : MonoBehaviour
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 isWaiting = false;
                 actionCount = 0;
+                doubleAction.bufAmount = 0;
             }
             if(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][2] != 0f)
             {
@@ -252,6 +254,7 @@ public class CharacterMovement : MonoBehaviour
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 actionCount = 0;
                 isWaiting = false;
+                doubleAction.bufAmount = 0;
             }
 
         }
