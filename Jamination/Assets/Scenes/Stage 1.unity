@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 1255058884}
   m_Layer: 0
   m_Name: Void
-  m_TagString: Untagged
+  m_TagString: Void
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,9 +410,9 @@ GameObject:
   - component: {fileID: 1366316636}
   - component: {fileID: 1366316635}
   - component: {fileID: 1366316634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 2124886131}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1387,11 +1387,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427711, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.48
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427711, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.02
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427711, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: m_LocalPosition.z
