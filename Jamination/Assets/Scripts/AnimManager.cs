@@ -6,16 +6,16 @@ public class AnimManager : MonoBehaviour
 {
     [SerializeField] Animator[] anims;
     bool isFirstTime = true;
-    Animator changeLevel;
-    private void Start() {
-        changeLevel = GameObject.Find("ChangeLevel").GetComponent<Animator>();
+    public Animator changeLevel;
+    private void Start() 
+    {
+        // changeLevel = GameObject.Find("ChangeLevel").GetComponent<Animator>();
     }
 
     public void SetAnim(int index)
     
     {
         int i =index%anims.Length;
-        Debug.Log(i);
         if(isFirstTime)
         {
             anims[i].SetBool("isWalking", true);

@@ -31,6 +31,11 @@ public class CharacterMovement : MonoBehaviour
     bool isWin;
     [SerializeField] ParticleSystem loseParticle;
     SpriteRenderer spriteRenderer;
+    private int portalIndex = 0;
+    private bool isOnPortal = false;
+    private bool groundCheck = false;
+    private bool isOnExitPortal = false;
+    public bool startGame = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +50,7 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isGrounded);
+        Debug.Log(isOnPortal);
         RaycastHit2D hitRight = Physics2D.Raycast(new Vector3(playerTransform.position.x,playerTransform.position.y-0.03f,0f), playerTransform.right , RaycastRange, layerMask);
         RaycastHit2D hitLeft = Physics2D.Raycast(new Vector3(playerTransform.position.x,playerTransform.position.y-0.03f,0f) , -playerTransform.right , RaycastRange, layerMask);
         RaycastHit2D hitForward = Physics2D.Raycast(playerTransform.position , playerTransform.up , RaycastRange, layerMask);
@@ -54,12 +59,17 @@ public class CharacterMovement : MonoBehaviour
         verticalMove = Input.GetAxisRaw("Vertical");
         if(Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical") || Input.GetKeyDown(KeyCode.Space))
         {
+            startGame = true;
             animIndex++;
             animManager.SetAnim(animIndex);
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
             Restart();
+        }
+        if(isOnPortal)
+        {
+            StartCoroutine(OnPortal());
         }
         if(Input.GetKeyDown(KeyCode.Space) && !isWaiting && isGrounded)
         {
@@ -105,6 +115,10 @@ public class CharacterMovement : MonoBehaviour
         {
             wallBack = false;
         }
+        if(isOnExitPortal)
+        {
+            groundCheck = false;
+        }
   
     }
     void Restart()
@@ -119,6 +133,10 @@ public class CharacterMovement : MonoBehaviour
             isWin = true;
             isGrounded = false;
         }
+        if(other.gameObject.tag == "Ground")
+        {
+            groundCheck = true;
+        }
     }
     IEnumerator WaitNextStage()
     {
@@ -129,9 +147,12 @@ public class CharacterMovement : MonoBehaviour
     }
     void GameOver()
     {
-        loseParticle.Play();
-        spriteRenderer.enabled = false;
-        StartCoroutine(WaitGameOver());
+        if(!isOnPortal && !isOnExitPortal)
+        {
+            loseParticle.Play();
+            spriteRenderer.enabled = false;
+            StartCoroutine(WaitGameOver());
+        }
     }
     IEnumerator WaitGameOver()
     {
@@ -142,7 +163,16 @@ public class CharacterMovement : MonoBehaviour
     {
         if(other.gameObject.tag == "Ground")
         {
-            isGrounded = false;
+            if(groundCheck)
+            {
+                isGrounded = true;
+            }
+            else 
+            {
+                isGrounded = false;
+                isOnExitPortal = false;
+                isOnPortal = false;
+            }
             if(!isWin){
                 GameOver();
             }
@@ -154,12 +184,71 @@ public class CharacterMovement : MonoBehaviour
         {
             isGrounded = true;
         }
+        if(other.gameObject.tag == "Ground")
+        {
+        
+            if(playerTransform.position.x <= Portal.portalEntry[SceneManager.GetActiveScene().buildIndex-1].x + 0.5f && Portal.portalEntry[SceneManager.GetActiveScene().buildIndex-1].x - 0.5f <= playerTransform.position.x &&SceneManager.GetActiveScene().buildIndex != 10)
+            {
+                if(playerTransform.position.y <= Portal.portalEntry[SceneManager.GetActiveScene().buildIndex-1].y + 0.5f && Portal.portalEntry[SceneManager.GetActiveScene().buildIndex-1].y - 0.5f <= playerTransform.position.y)
+                {
+                    portalIndex = SceneManager.GetActiveScene().buildIndex-1;
+                    isOnPortal = true;
+                    isOnExitPortal = false;
+                }
+            }
+            if(playerTransform.position.x <= Portal.portalExit[SceneManager.GetActiveScene().buildIndex-1].x + 0.5f && Portal.portalExit[SceneManager.GetActiveScene().buildIndex-1].x - 0.5f <= playerTransform.position.x &&SceneManager.GetActiveScene().buildIndex != 10)
+            {
+                if(playerTransform.position.y <= Portal.portalExit[SceneManager.GetActiveScene().buildIndex-1].y + 0.5f && Portal.portalExit[SceneManager.GetActiveScene().buildIndex-1].y - 0.5f <= playerTransform.position.y)
+                {
+                    isOnPortal = false;
+                    isOnExitPortal = true;
+                }
+            }
+            if(SceneManager.GetActiveScene().buildIndex == 10)
+            {
+                if(playerTransform.position.x <= Portal.portalEntry[SceneManager.GetActiveScene().buildIndex-1].x + 0.5f && Portal.portalEntry[SceneManager.GetActiveScene().buildIndex-1].x - 0.5f <= playerTransform.position.x)
+                {
+                    if(playerTransform.position.y <= Portal.portalEntry[SceneManager.GetActiveScene().buildIndex-1].y + 0.5f && Portal.portalEntry[SceneManager.GetActiveScene().buildIndex-1].y - 0.5f <= playerTransform.position.y)
+                        {
+                            portalIndex = SceneManager.GetActiveScene().buildIndex-1;
+                            isOnPortal = true;
+                            isOnExitPortal = false;
+                        }
+                }
+                else if(playerTransform.position.x <= Portal.portalEntry[SceneManager.GetActiveScene().buildIndex].x + 0.5f && Portal.portalEntry[SceneManager.GetActiveScene().buildIndex].x - 0.5f <= playerTransform.position.x)
+                {
+                    if(playerTransform.position.y <= Portal.portalEntry[SceneManager.GetActiveScene().buildIndex].y + 0.5f && Portal.portalEntry[SceneManager.GetActiveScene().buildIndex].y - 0.5f <= playerTransform.position.y)
+                        {
+                            portalIndex = SceneManager.GetActiveScene().buildIndex;
+                            isOnPortal = true;
+                            isOnExitPortal = false;
+                        }
+                }
+                if(playerTransform.position.x <= Portal.portalExit[SceneManager.GetActiveScene().buildIndex-1].x + 0.5f && Portal.portalExit[SceneManager.GetActiveScene().buildIndex-1].x - 0.5f <= playerTransform.position.x)
+                {
+                    if(playerTransform.position.y <= Portal.portalExit[SceneManager.GetActiveScene().buildIndex-1].y + 0.5f && Portal.portalExit[SceneManager.GetActiveScene().buildIndex-1].y - 0.5f <= playerTransform.position.y)
+                        {
+                            isOnExitPortal = true;
+                            isOnPortal = false;
+                        }
+                }
+                else if(playerTransform.position.x <= Portal.portalExit[SceneManager.GetActiveScene().buildIndex].x + 0.5f && Portal.portalExit[SceneManager.GetActiveScene().buildIndex].x - 0.5f <= playerTransform.position.x)
+                {
+                    if(playerTransform.position.y <= Portal.portalExit[SceneManager.GetActiveScene().buildIndex].y + 0.5f && Portal.portalExit[SceneManager.GetActiveScene().buildIndex].y - 0.5f <= playerTransform.position.y)
+                        {
+                            isOnExitPortal = true;
+                            isOnPortal = false;
+                        }
+                }
+            }
+        }
     }
     IEnumerator Move()
     {
 
         if(Input.GetButtonDown("Horizontal") && isGrounded && !isWaiting)
         {
+            startGame = true;
             if(horizontalMove == 1 && wallRight && isGrounded)
             {
                 isWaiting = true;
@@ -188,6 +277,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else if(Input.GetButtonDown("Vertical") && isGrounded && !isWaiting)
         {
+            startGame = true;
             if(verticalMove == 1 && wallForward && isGrounded)
             {
                 isWaiting = true;
@@ -262,13 +352,17 @@ public class CharacterMovement : MonoBehaviour
                 isCrash = false;
                 directionCount++;
             }
-            else if(isGrounded)
+            else if(isGrounded && !isOnPortal)
             {
                 targetPosition = playerTransform.position + new Vector3(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 directionCount++;
                 isMoved = false;
                 isCrash = false;
+            }
+            else
+            {
+                directionCount++;
             }
         }
         if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1].Length <= directionCount)
@@ -277,7 +371,8 @@ public class CharacterMovement : MonoBehaviour
             isMoved = false;
         }
     }
-    IEnumerator DoubleActions(){
+    IEnumerator DoubleActions()
+    {
         if(Input.GetKeyDown(KeyCode.Space) && !isWaiting && isGrounded && doubleAction.bufAmount > 0)
         {
             if(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][2] == 0f)
@@ -323,6 +418,16 @@ public class CharacterMovement : MonoBehaviour
                 doubleAction.bufAmount = 0;
             }
 
+        }
+    }
+    IEnumerator OnPortal()
+    {
+        if(isOnPortal)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            yield return new WaitForSeconds(1f);
+            playerTransform.position = Portal.portalExit[portalIndex];
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
     
