@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject levels;
     [SerializeField] AudioClip buttonClick;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] GameObject infoPanel;
     
     public void PlayButtonClick()
     {
@@ -17,7 +18,7 @@ public class MenuManager : MonoBehaviour
 
 
    public void PlayGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        infoPanel.SetActive(true);
    }
    public void QuitGame(){
        Debug.Log("Quit");
@@ -33,4 +34,8 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(true);
         levels.SetActive(false);
     }
+
+public void Skip(){
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+}
 }
