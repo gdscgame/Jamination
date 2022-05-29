@@ -31,7 +31,7 @@ public class CharacterMovement : MonoBehaviour
     bool isWin;
     [SerializeField] ParticleSystem loseParticle;
     [SerializeField] GameManager gameManager;
-    SpriteRenderer spriteRenderer;
+    [SerializeField]SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +39,6 @@ public class CharacterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0F;
         animManager = GameObject.Find("AnimManager").GetComponent<AnimManager>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         animManager.SetAnim(animIndex);
     }
 
