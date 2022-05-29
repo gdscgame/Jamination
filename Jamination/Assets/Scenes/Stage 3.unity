@@ -409,6 +409,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3869460329989547607, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
+      propertyPath: controls
+      value: 
+      objectReference: {fileID: 2129488078}
+    - target: {fileID: 3869460329989547607, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
       propertyPath: pausePanel
       value: 
       objectReference: {fileID: 231561714}
@@ -3965,6 +3969,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1859920519}
     m_Modifications:
+    - target: {fileID: 926082689, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2079014776}
+    - target: {fileID: 926082689, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Controls
+      objectReference: {fileID: 0}
     - target: {fileID: 2510523116487125895, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4083,6 +4095,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+--- !u!1 &2129488078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 330808421, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+  m_PrefabInstance: {fileID: 2129488077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!483693784 &229066273090215672
 TilemapRenderer:
   m_ObjectHideFlags: 0

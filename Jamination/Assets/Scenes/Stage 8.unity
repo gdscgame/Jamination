@@ -645,6 +645,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1670796982}
     m_Modifications:
+    - target: {fileID: 926082689, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 780946573}
+    - target: {fileID: 926082689, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Controls
+      objectReference: {fileID: 0}
     - target: {fileID: 2510523116487125895, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -775,6 +783,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+--- !u!1 &710463994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 330808421, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+  m_PrefabInstance: {fileID: 710463993}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &746882983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4361,6 +4374,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3869460329989547604, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 70dc22052a24aeb45a4a147bf43872e4, type: 3}
     - target: {fileID: 3869460329989547606, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -4405,6 +4422,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3869460329989547607, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
+      propertyPath: controls
+      value: 
+      objectReference: {fileID: 710463994}
     - target: {fileID: 3869460329989547607, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
       propertyPath: pausePanel
       value: 

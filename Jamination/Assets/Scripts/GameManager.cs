@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip winSound;
     [SerializeField] AudioClip crash;
     [SerializeField] AudioClip portal;
+    [SerializeField] GameObject controls;
+    bool isOpen;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,5 +68,16 @@ public class GameManager : MonoBehaviour
     public void Quit(){
         Application.Quit();
         Debug.Log("Quit");
+    }
+    public void Controls(){
+        if(!isOpen){
+        controls.SetActive(true);
+        isOpen =true;
+
+        }
+        else if(isOpen){
+            controls.SetActive(false);
+            isOpen = false;
+        }
     }
 }

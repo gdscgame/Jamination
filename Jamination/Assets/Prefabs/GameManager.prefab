@@ -52,6 +52,7 @@ MonoBehaviour:
   winSound: {fileID: 8300000, guid: e37b9d339ccc22e49aa9ba3189adefde, type: 3}
   crash: {fileID: 8300000, guid: dc03122c38a62f543b7d72ad8aa8d04f, type: 3}
   portal: {fileID: 8300000, guid: b1c34e83f65f96342962b63e1c2d6723, type: 3}
+  controls: {fileID: 0}
 --- !u!82 &3869460329989547604
 AudioSource:
   m_ObjectHideFlags: 0

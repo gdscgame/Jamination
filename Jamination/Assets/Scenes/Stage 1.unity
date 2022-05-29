@@ -220,6 +220,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221084502}
   m_CullTransparentMesh: 1
+--- !u!1 &249575314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 330808421, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+  m_PrefabInstance: {fileID: 2510523117551192183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &467386094 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 467386094, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
@@ -4836,6 +4841,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1865710530}
     m_Modifications:
+    - target: {fileID: 926082689, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1896401961}
+    - target: {fileID: 926082689, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Controls
+      objectReference: {fileID: 0}
     - target: {fileID: 2510523116487125895, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5050,6 +5063,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3869460329989547607, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
+      propertyPath: controls
+      value: 
+      objectReference: {fileID: 249575314}
     - target: {fileID: 3869460329989547607, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
       propertyPath: pausePanel
       value: 

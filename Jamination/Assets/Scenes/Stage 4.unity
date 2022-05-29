@@ -2718,6 +2718,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3869460329989547604, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a848e7b3140a7a448cd021d3f6332fb, type: 3}
     - target: {fileID: 3869460329989547606, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2763,6 +2767,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3869460329989547607, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
+      propertyPath: controls
+      value: 
+      objectReference: {fileID: 397936342}
+    - target: {fileID: 3869460329989547607, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
       propertyPath: pausePanel
       value: 
       objectReference: {fileID: 1474036955}
@@ -2772,6 +2780,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
+--- !u!1 &397936342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3869460329989547609, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
+  m_PrefabInstance: {fileID: 397936341}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &446203064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4213,6 +4226,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1114857430}
     m_Modifications:
+    - target: {fileID: 926082689, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1999000208}
+    - target: {fileID: 926082689, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Controls
+      objectReference: {fileID: 0}
     - target: {fileID: 2510523116487125895, guid: c4d1ee5c1b89aaf45af47c6f4857156c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4336,7 +4357,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3869460329989547607, guid: eb544a36333fbd449b847ee5ff34d352, type: 3}
   m_PrefabInstance: {fileID: 397936341}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 397936342}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a429571f5676c648ad8e630c55b39a9, type: 3}
