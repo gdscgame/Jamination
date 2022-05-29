@@ -2797,6 +2797,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427708, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
+      propertyPath: spaceImage
+      value: 
+      objectReference: {fileID: 1779153393}
+    - target: {fileID: 6741624845846427708, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1999000208}
+    - target: {fileID: 6741624845846427708, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: doubleAction
       value: 
       objectReference: {fileID: 145713511}
