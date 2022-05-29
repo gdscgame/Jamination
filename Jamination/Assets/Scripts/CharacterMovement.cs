@@ -29,6 +29,8 @@ public class CharacterMovement : MonoBehaviour
     int animIndex;
     AnimManager animManager;
     bool isWin;
+    [SerializeField] ParticleSystem loseParticle;
+    SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,7 @@ public class CharacterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0F;
         animManager = GameObject.Find("AnimManager").GetComponent<AnimManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animManager.SetAnim(animIndex);
     }
 
@@ -53,6 +56,10 @@ public class CharacterMovement : MonoBehaviour
         {
             animIndex++;
             animManager.SetAnim(animIndex);
+        }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Restart();
         }
         if(Input.GetKeyDown(KeyCode.Space) && !isWaiting && isGrounded)
         {
@@ -110,6 +117,7 @@ public class CharacterMovement : MonoBehaviour
             animManager.ChangeLevel();
             StartCoroutine(WaitNextStage());
             isWin = true;
+            isGrounded = false;
         }
     }
     IEnumerator WaitNextStage()
@@ -119,13 +127,24 @@ public class CharacterMovement : MonoBehaviour
 
 
     }
+    void GameOver()
+    {
+        loseParticle.Play();
+        spriteRenderer.enabled = false;
+        StartCoroutine(WaitGameOver());
+    }
+    IEnumerator WaitGameOver()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Restart();
+    }
     void OnTriggerExit2D(Collider2D other)
     {
         if(other.gameObject.tag == "Ground")
         {
             isGrounded = false;
             if(!isWin){
-                Restart();
+                GameOver();
             }
         }
     }
@@ -176,7 +195,7 @@ public class CharacterMovement : MonoBehaviour
                 yield return new WaitForSeconds(0.3f);
                 playerTransform.position -= new Vector3(0f,knockBack,0f);
                 isWaiting = false;
-                isCrash = true;
+                isCrash = true; 
             }
             else if(verticalMove == -1 && wallBack && isGrounded)
             {
