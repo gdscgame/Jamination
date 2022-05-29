@@ -6,10 +6,27 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject pausePanel;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip hopSound;
+    [SerializeField] AudioClip gameOver;
+    [SerializeField] AudioClip winSound;
+    [SerializeField] AudioClip crash;
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+    public void Move(){
+        audioSource.PlayOneShot(hopSound);
+    }
+    public void GameOver(){
+        audioSource.PlayOneShot(gameOver);
+    }
+    public void Win(){
+        audioSource.PlayOneShot(winSound);
+    }
+    public void Crash(){
+        audioSource.PlayOneShot(crash);
     }
 
     // Update is called once per frame

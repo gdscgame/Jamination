@@ -5,10 +5,10 @@ using UnityEngine;
 public class AnimManager : MonoBehaviour
 {
     [SerializeField] Animator[] anims;
+
     bool isFirstTime = true;
-    Animator changeLevel;
+    public Animator changeLevel;
     private void Start() {
-        changeLevel = GameObject.Find("ChangeLevel").GetComponent<Animator>();
     }
 
     public void SetAnim(int index)

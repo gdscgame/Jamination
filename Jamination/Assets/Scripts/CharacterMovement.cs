@@ -30,6 +30,7 @@ public class CharacterMovement : MonoBehaviour
     AnimManager animManager;
     bool isWin;
     [SerializeField] ParticleSystem loseParticle;
+    [SerializeField] GameManager gameManager;
     SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,13 @@ public class CharacterMovement : MonoBehaviour
         {
             animIndex++;
             animManager.SetAnim(animIndex);
+            if(!isCrash)
+            {
+                gameManager.Move();
+            }
+            else{
+                gameManager.Crash();
+            }
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
@@ -118,6 +126,7 @@ public class CharacterMovement : MonoBehaviour
             StartCoroutine(WaitNextStage());
             isWin = true;
             isGrounded = false;
+            gameManager.Win();
         }
     }
     IEnumerator WaitNextStage()
@@ -131,6 +140,7 @@ public class CharacterMovement : MonoBehaviour
     {
         loseParticle.Play();
         spriteRenderer.enabled = false;
+        gameManager.GameOver();
         StartCoroutine(WaitGameOver());
     }
     IEnumerator WaitGameOver()
@@ -150,7 +160,7 @@ public class CharacterMovement : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Ground")
+        if(other.gameObject.tag == "Ground" && !isWin)
         {
             isGrounded = true;
         }
@@ -231,6 +241,7 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
+                gameManager.Crash();
             }
             else if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallLeft && isGrounded)
             {
@@ -241,6 +252,8 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
+                gameManager.Crash();
+
             }
             else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == 1 && wallForward && isGrounded)
             {
@@ -251,6 +264,8 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
+                gameManager.Crash();
+
             }
             else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallBack && isGrounded)
             {
@@ -261,6 +276,8 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
+                gameManager.Crash();
+
             }
             else if(isGrounded)
             {
