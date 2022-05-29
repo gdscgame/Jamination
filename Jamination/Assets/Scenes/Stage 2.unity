@@ -3480,6 +3480,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8841269137237733765, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
+      propertyPath: m_Size.x
+      value: 1.35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
 --- !u!1 &1597277402
@@ -3914,7 +3918,7 @@ MonoBehaviour:
   - {fileID: 1597277406}
   - {fileID: 1608435026}
   - {fileID: 938572289}
-  changeLevel: {fileID: 0}
+  changeLevel: {fileID: 320754757}
 --- !u!4 &2057392535
 Transform:
   m_ObjectHideFlags: 0
