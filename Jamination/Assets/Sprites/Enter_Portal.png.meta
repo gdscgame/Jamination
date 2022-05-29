@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 607ffad1a1fca82419a2993477ce1caa
+guid: 61f6d484cf31f164bac797e15202d282
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Exit_Portal_0
+      name: Enter_Portal_0
       rect:
         serializedVersion: 2
         x: 16
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0744ad4f4dbdabf469fc702bb592d1e5
-      internalID: 147212993
+      spriteID: 2c4ff6962d9dfec438d4bbc733fc0821
+      internalID: 925222748
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Exit_Portal_1
+      name: Enter_Portal_1
       rect:
         serializedVersion: 2
         x: 79
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1eb735cae0bca4148936348febf0e14a
-      internalID: 174711341
+      spriteID: 9d5e0a186bbde154e84cc351b9a283d0
+      internalID: -951307042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Exit_Portal_2
+      name: Enter_Portal_2
       rect:
         serializedVersion: 2
         x: 144
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84eb8f9d77b9dce458cce9ba57a419d4
-      internalID: -279173589
+      spriteID: 671b48cb628d0fe42a00c7d5bcc3cb35
+      internalID: -1901750183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Exit_Portal_3
+      name: Enter_Portal_3
       rect:
         serializedVersion: 2
         x: 207
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9866e8bbae403844cb7113963812891f
-      internalID: 907927136
+      spriteID: 99f15e78be9dedc4ba6c642a6c0db845
+      internalID: 1169806623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Exit_Portal_4
+      name: Enter_Portal_4
       rect:
         serializedVersion: 2
         x: 270
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a42c6049b2dd0748825123fbc9bfb04
-      internalID: 1962406330
+      spriteID: 54d3f08d8ce55b64f890f4a65c057faa
+      internalID: 2025146679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Exit_Portal_5
+      name: Enter_Portal_5
       rect:
         serializedVersion: 2
         x: 334
@@ -223,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 440bb6044c15ea94db9ef7cf8b63ac0b
-      internalID: -1257807151
+      spriteID: 4a47506d63841b94598c4c6bf46230f9
+      internalID: 642600812
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Exit_Portal_6
+      name: Enter_Portal_6
       rect:
         serializedVersion: 2
         x: 398
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 125ea99aac817f846b2d337b9d73f341
-      internalID: -773513872
+      spriteID: 411c37c93b86381408caf258107e2137
+      internalID: -1907516338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Exit_Portal_7
+      name: Enter_Portal_7
       rect:
         serializedVersion: 2
         x: 463
@@ -265,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c6c24669c32cbf4ebc9691c0d305b44
-      internalID: -2091280812
+      spriteID: 15115cb3bd07a4448830302b541f5bd6
+      internalID: 2008531723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Exit_Portal_8
+      name: Enter_Portal_8
       rect:
         serializedVersion: 2
         x: 528
@@ -286,8 +286,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f741f8ed63a37fc488fdd1a88084d36a
-      internalID: -2059458051
+      spriteID: 7f25b213b3661c0428e836b35b4f9736
+      internalID: -441832705
       vertices: []
       indices: 
       edges: []
@@ -303,15 +303,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Exit_Portal_4: 1962406330
-      Exit_Portal_1: 174711341
-      Exit_Portal_3: 907927136
-      Exit_Portal_7: -2091280812
-      Exit_Portal_8: -2059458051
-      Exit_Portal_0: 147212993
-      Exit_Portal_6: -773513872
-      Exit_Portal_5: -1257807151
-      Exit_Portal_2: -279173589
+      Enter_Portal_0: 925222748
+      Enter_Portal_8: -441832705
+      Enter_Portal_7: 2008531723
+      Enter_Portal_2: -1901750183
+      Enter_Portal_1: -951307042
+      Enter_Portal_4: 2025146679
+      Enter_Portal_3: 1169806623
+      Enter_Portal_5: 642600812
+      Enter_Portal_6: -1907516338
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
