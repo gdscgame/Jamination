@@ -7,6 +7,13 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] GameObject menu;
     [SerializeField] GameObject levels;
+    [SerializeField] AudioClip buttonClick;
+    [SerializeField] AudioSource audioSource;
+    
+    public void PlayButtonClick()
+    {
+        audioSource.PlayOneShot(buttonClick);
+    }
 
 
    public void PlayGame(){
