@@ -1376,7 +1376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1745874114
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1650,6 +1650,7 @@ GameObject:
   - component: {fileID: 1966396593}
   - component: {fileID: 1966396595}
   - component: {fileID: 1966396594}
+  - component: {fileID: 1966396596}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -1743,8 +1744,8 @@ Tilemap:
   - first: {x: 0, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1752,11 +1753,15 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 6578739db5be10e4c8b85df4211da7fd, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 29e717ac5894918408658fd824b16dab, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 3b24fade6071e614588be0fe9fe31b0f, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 466176a693cf69d428b4de015fcd8974, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 2
     m_Data:
@@ -1803,6 +1808,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1966396596
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966396592}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1001 &2043174749
 PrefabInstance:
   m_ObjectHideFlags: 0
