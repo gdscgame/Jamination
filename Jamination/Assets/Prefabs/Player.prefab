@@ -5032,6 +5032,8 @@ MonoBehaviour:
   knockBack: 0.28
   doubleAction: {fileID: 0}
   loseParticle: {fileID: 15085446063337328}
+  spriteRenderer: {fileID: 467386094}
+  startGame: 0
   gameManager: {fileID: 0}
 --- !u!50 &987759834
 Rigidbody2D:
@@ -5080,5 +5082,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.5}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.35, y: 1}
   m_Direction: 0

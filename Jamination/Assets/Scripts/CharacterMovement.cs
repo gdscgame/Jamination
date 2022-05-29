@@ -28,7 +28,7 @@ public class CharacterMovement : MonoBehaviour
     public DoubleAction doubleAction;
     int animIndex;
     AnimManager animManager;
-    bool isWin;
+    public bool isWin;
     [SerializeField] ParticleSystem loseParticle;
     [SerializeField] SpriteRenderer spriteRenderer;
 
@@ -39,6 +39,7 @@ public class CharacterMovement : MonoBehaviour
     public bool startGame = false;
     private bool crashControl = false;
     [SerializeField] GameManager gameManager;
+    private int portalsound = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -134,14 +135,19 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Award"){
+            isGrounded = false;
+            gameManager.Win();
             animManager.ChangeLevel();
             StartCoroutine(WaitNextStage());
             isWin = true;
-            isGrounded = false;
         }
         if(other.gameObject.tag == "Ground")
         {
             groundCheck = true;
+        }
+        if(other.gameObject.tag == "Enemy")
+        {
+            GameOver();
         }
     }
     IEnumerator WaitNextStage()
@@ -155,6 +161,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if(!isOnPortal && !isOnExitPortal)
         {
+            gameManager.GameOver();
             loseParticle.Play();
             spriteRenderer.enabled = false;
             StartCoroutine(WaitGameOver());
@@ -165,6 +172,7 @@ public class CharacterMovement : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         Restart();
     }
+    
     void OnTriggerExit2D(Collider2D other)
     {
         if(other.gameObject.tag == "Ground")
@@ -448,6 +456,10 @@ public class CharacterMovement : MonoBehaviour
     {
         if(isOnPortal)
         {
+            if(portalsound == 1){
+                portalsound--;
+                gameManager.Portal();
+            }
             spriteRenderer.enabled = false;
             yield return new WaitForSeconds(1f);
             playerTransform.position = Portal.portalExit[portalIndex];

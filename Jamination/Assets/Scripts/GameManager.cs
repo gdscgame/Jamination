@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip gameOver;
     [SerializeField] AudioClip winSound;
     [SerializeField] AudioClip crash;
+    [SerializeField] AudioClip portal;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
     }
     public void Crash(){
         audioSource.PlayOneShot(crash);
+    }
+    public void Portal(){
+        audioSource.PlayOneShot(portal);
     }
 
     // Update is called once per frame
