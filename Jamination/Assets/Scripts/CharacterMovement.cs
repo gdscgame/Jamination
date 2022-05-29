@@ -30,7 +30,8 @@ public class CharacterMovement : MonoBehaviour
     AnimManager animManager;
     bool isWin;
     [SerializeField] ParticleSystem loseParticle;
-    SpriteRenderer spriteRenderer;
+    [SerializeField] SpriteRenderer spriteRenderer;
+
     private int portalIndex = 0;
     private bool isOnPortal = false;
     private bool groundCheck = false;
@@ -43,7 +44,6 @@ public class CharacterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0F;
         animManager = GameObject.Find("AnimManager").GetComponent<AnimManager>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         animManager.SetAnim(animIndex);
     }
 
