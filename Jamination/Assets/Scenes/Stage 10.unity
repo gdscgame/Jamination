@@ -244,6 +244,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6741624845846427708, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1072574317}
+    - target: {fileID: 6741624845846427708, guid: c4849ee0a0a8c904f9cd3976699072c0, type: 3}
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 111488989}

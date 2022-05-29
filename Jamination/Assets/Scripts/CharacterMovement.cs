@@ -39,6 +39,7 @@ public class CharacterMovement : MonoBehaviour
     public bool startGame = false;
     private bool crashControl = false;
     [SerializeField] GameManager gameManager;
+    [SerializeField] GameObject spaceImage;
     private int portalsound = 1;
     // Start is called before the first frame update
     void Start()
@@ -125,6 +126,9 @@ public class CharacterMovement : MonoBehaviour
         if(isOnExitPortal)
         {
             groundCheck = false;
+        }
+        if(doubleAction.bufAmount == 0 && spaceImage != null){
+            spaceImage.SetActive(false);
         }
   
     }
