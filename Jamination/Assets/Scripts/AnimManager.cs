@@ -5,17 +5,17 @@ using UnityEngine;
 public class AnimManager : MonoBehaviour
 {
     [SerializeField] Animator[] anims;
-
     bool isFirstTime = true;
     public Animator changeLevel;
-    private void Start() {
+    private void Start() 
+    {
+        // changeLevel = GameObject.Find("ChangeLevel").GetComponent<Animator>();
     }
 
     public void SetAnim(int index)
     
     {
         int i =index%anims.Length;
-        Debug.Log(i);
         if(isFirstTime)
         {
             anims[i].SetBool("isWalking", true);
