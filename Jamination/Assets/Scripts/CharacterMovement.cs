@@ -28,7 +28,7 @@ public class CharacterMovement : MonoBehaviour
     public DoubleAction doubleAction;
     int animIndex;
     AnimManager animManager;
-    bool isWin;
+    public bool isWin;
     [SerializeField] ParticleSystem loseParticle;
     [SerializeField] SpriteRenderer spriteRenderer;
 
@@ -37,6 +37,9 @@ public class CharacterMovement : MonoBehaviour
     private bool groundCheck = false;
     private bool isOnExitPortal = false;
     public bool startGame = false;
+    private bool crashControl = false;
+    [SerializeField] GameManager gameManager;
+    private int portalsound = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +65,10 @@ public class CharacterMovement : MonoBehaviour
             startGame = true;
             animIndex++;
             animManager.SetAnim(animIndex);
+        }
+        if(crashControl)
+        {
+            gameManager.Crash();
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
@@ -128,14 +135,19 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Award"){
+            isGrounded = false;
+            gameManager.Win();
             animManager.ChangeLevel();
             StartCoroutine(WaitNextStage());
             isWin = true;
-            isGrounded = false;
         }
         if(other.gameObject.tag == "Ground")
         {
             groundCheck = true;
+        }
+        if(other.gameObject.tag == "Enemy")
+        {
+            GameOver();
         }
     }
     IEnumerator WaitNextStage()
@@ -149,6 +161,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if(!isOnPortal && !isOnExitPortal)
         {
+            gameManager.GameOver();
             loseParticle.Play();
             spriteRenderer.enabled = false;
             StartCoroutine(WaitGameOver());
@@ -159,6 +172,7 @@ public class CharacterMovement : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         Restart();
     }
+    
     void OnTriggerExit2D(Collider2D other)
     {
         if(other.gameObject.tag == "Ground")
@@ -257,6 +271,7 @@ public class CharacterMovement : MonoBehaviour
                 playerTransform.position -= new Vector3(knockBack,0f,0f);
                 isWaiting = false;
                 isCrash = true;
+                gameManager.Crash();
             }
             else if(horizontalMove == -1 && wallLeft && isGrounded)
             {
@@ -266,6 +281,7 @@ public class CharacterMovement : MonoBehaviour
                 playerTransform.position -= new Vector3(-knockBack,0f,0f);
                 isWaiting = false;
                 isCrash = true;
+                gameManager.Crash();
             }
             else if(isGrounded)
             {
@@ -273,6 +289,7 @@ public class CharacterMovement : MonoBehaviour
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 isMoved = true;
                 isCrash =false;
+                gameManager.Move();
             }
         }
         else if(Input.GetButtonDown("Vertical") && isGrounded && !isWaiting)
@@ -286,6 +303,7 @@ public class CharacterMovement : MonoBehaviour
                 playerTransform.position -= new Vector3(0f,knockBack,0f);
                 isWaiting = false;
                 isCrash = true; 
+                gameManager.Crash();
             }
             else if(verticalMove == -1 && wallBack && isGrounded)
             {
@@ -295,6 +313,7 @@ public class CharacterMovement : MonoBehaviour
                 playerTransform.position -= new Vector3(0f,-knockBack,0f);
                 isWaiting = false;
                 isCrash = true;
+                gameManager.Crash();
             }
             else if (isGrounded)
             {
@@ -302,6 +321,7 @@ public class CharacterMovement : MonoBehaviour
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 isMoved = true;
                 isCrash = false;
+                gameManager.Move();
             }
         }
         isWaiting = true;
@@ -321,6 +341,7 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
+                gameManager.Crash();
             }
             else if(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallLeft && isGrounded)
             {
@@ -331,6 +352,7 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
+                gameManager.Crash();
             }
             else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == 1 && wallForward && isGrounded)
             {
@@ -341,6 +363,7 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
+                gameManager.Crash();
             }
             else if(Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount] == -1 && wallBack && isGrounded)
             {
@@ -351,6 +374,7 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = false;
                 isCrash = false;
                 directionCount++;
+                gameManager.Crash();
             }
             else if(isGrounded && !isOnPortal)
             {
@@ -359,6 +383,7 @@ public class CharacterMovement : MonoBehaviour
                 directionCount++;
                 isMoved = false;
                 isCrash = false;
+                gameManager.Move();
             }
             else
             {
@@ -380,14 +405,17 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = true;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                gameManager.Move();
                 yield return new WaitForSeconds(0.3f);
                 actionCount += 1;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
                 actionCount = 0;
+                gameManager.Move();
                 yield return new WaitForSeconds(0.3F);
                 targetPosition = playerTransform.position + new Vector3(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                gameManager.Move();
                 directionCount++;
                 isMoved = false;
                 isCrash = false;
@@ -399,18 +427,22 @@ public class CharacterMovement : MonoBehaviour
                 isWaiting = true;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                gameManager.Move();
                 yield return new WaitForSeconds(0.3f);
                 actionCount += 1;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                gameManager.Move();
                 yield return new WaitForSeconds(0.3f);
                 actionCount += 1;
                 targetPosition = playerTransform.position + new Vector3(DoubleAction.extraHorizontalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],DoubleAction.extraVerticalDirections[SceneManager.GetActiveScene().buildIndex-1][actionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                gameManager.Move();
                 actionCount = 0;
                 yield return new WaitForSeconds(0.3F);
                 targetPosition = playerTransform.position + new Vector3(Directions.horizontalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],Directions.verticalDirections[SceneManager.GetActiveScene().buildIndex-1][directionCount],0f);
                 playerTransform.position = Vector3.Lerp(playerTransform.position,targetPosition,lerpSpeed);
+                gameManager.Move();
                 directionCount++;
                 isMoved = false;
                 isCrash = false;
@@ -424,10 +456,14 @@ public class CharacterMovement : MonoBehaviour
     {
         if(isOnPortal)
         {
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            if(portalsound == 1){
+                portalsound--;
+                gameManager.Portal();
+            }
+            spriteRenderer.enabled = false;
             yield return new WaitForSeconds(1f);
             playerTransform.position = Portal.portalExit[portalIndex];
-            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            spriteRenderer.enabled = true;
         }
     }
     
